@@ -1,17 +1,10 @@
-FROM node:alpine AS builder
+# Layered 
+FROM node:22-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm i
-
-# COPY  . . 
-COPY src ./src
-COPY public ./public 
-RUN npm run build 
-
-
-# Stage:2 production 
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+RUN npm install
+COPY . .
+RUN npm run build
+RUN npm install -g serve
+EXPOSE 3000
+CMD ["serve", "-s", "build", "-l", "3000"]

@@ -19,29 +19,11 @@ import AuthContext, { AuthContextProvider } from './components/shared/AuthContex
 import { GET_OWN_PROFILE } from './services/userService';
 function App() {
 
-  // we should check whether the token is valid or not 
-  // check if the access_token is valid or not 
   const [isValidated, setIsValidated] = useState(
     localStorage.getItem("tokens") ? true : false
   )
-  // const [isLoading, setIsLoading] = useState(true)
-
-  //validate the token in ensure that users truly valid 
-  // useEffect(() => {
-  //   if (localStorage.getItem("tokens")) {
-  //     GET_OWN_PROFILE().then((response) => {
-  //       console.log("This is the response of the user profile : ", response)
-  //       setIsValidated(true)
-  //     }).catch((error) => {
-  //       setIsValidated(false)
-  //     }).finally(() => {
-  //       setIsLoading(false)
-  //     }
-  //     )
-
-  //   }
-
-  // }, [])
+   
+  
   const handleLoginCallBack = (value) => {
     setIsValidated(value) // get value from navbar 
   }
